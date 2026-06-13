@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "ROI Staff Directory",
+    "slug": "roi-staff-directory",
+    "version": "1.0.0",
+    "orientation": "default",
+    "platforms": ["android"],
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#941a1d"
+      }
+    }
+  }
+}
