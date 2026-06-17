@@ -23,6 +23,7 @@ import { getStaffById, addStaff, updateStaff, DEPARTMENTS } from '../data/staffS
 import { Dialog } from '../components/ui/Dialog.jsx';
 import { COLOR, FONT, SPACE, RADIUS } from '../styles/tokens.js';
 import { shared } from '../styles/componentStyles.js';
+import { useTheme } from '../contexts/ThemeContext.jsx';
 
 const EMPTY_FORM = {
   name:         '',
@@ -54,6 +55,7 @@ function validate(form) {
 }
 
 export function StaffFormPage({ staffId, onBack, onSaved, isTablet }) {
+  const{ colors, fontSizes } = useTheme();
   const isEdit = staffId !== null && staffId !== undefined;
   const member = isEdit ? getStaffById(staffId) : null;
 
@@ -115,18 +117,20 @@ export function StaffFormPage({ staffId, onBack, onSaved, isTablet }) {
   return (
     <View style={shared.screen}>
       {/* ── Header ── */}
-      <View style={shared.pageHeaderRow}>
+      <View style={[shared.pageHeaderRow, { backgroundColor: colors.roiRed }]}>
         <TouchableOpacity
           onPress={onBack}
           accessibilityRole="button"
           accessibilityLabel="Discard and go back"
           style={styles.backArrow}
         >
-          <Text style={styles.backArrowText}>‹</Text>
+          <Text style={[styles.backArrowText, { color: colors.white }]}>‹</Text>
         </TouchableOpacity>
         <View>
-          <Text style={shared.pageTitle}>{isEdit ? 'Edit Profile' : 'Add Staff Member'}</Text>
-          <Text style={shared.pageSubtitle}>Red Opal Innovations</Text>
+          <Text style={[shared.pageTitle, { fontSize: fontSizes.xl }]}>
+            {isEdit ? 'Edit Profile' : 'Add Staff Member'}
+          </Text>
+          <Text style={[shared.pageSubtitle, { fontSize: fontSizes.sm }]}>Red Opal Innovations</Text>
         </View>
       </View>
 
@@ -136,39 +140,53 @@ export function StaffFormPage({ staffId, onBack, onSaved, isTablet }) {
         keyboardShouldPersistTaps="handled"
       >
         {/* ── Personal details ── */}
-        <View style={[shared.card, styles.section]}>
-          <Text style={shared.h1}>Personal Details</Text>
+        <View style={[shared.card, styles.section, { backgroundColor: colors.cardBg }]}>
+          <Text style={[shared.h1, { color: colors.roiRed, fontSize: fontSizes.lg }]}>Personal Details</Text>
 
-          <Field label="Full Name *" error={errors.name}>
+          <Field label="Full Name *" error={errors.name} colors={colors} fontSizes={fontSizes}>
             <TextInput
-              style={[shared.input, errors.name && shared.inputError]}
+              style={[
+                shared.input,
+                errors.name && shared.inputError,
+                { backgroundColor: colors.cardBg, color: colors.roiCharcoal, borderColor: colors.roiLightGrey, fontSize: fontSizes.base },
+              ]}
               value={form.name}
               onChangeText={(v) => setField('name', v)}
               placeholder="e.g. John Smith"
-              placeholderTextColor={COLOR.roiGrey}
+              placeholderTextColor={colors.roiGrey}
               accessibilityLabel="Full name"
             />
           </Field>
 
-          <Field label="Phone *" error={errors.phone}>
+          <Field label="Phone *" error={errors.phone} colors={colors} fontSizes={fontSizes}>
             <TextInput
-              style={[shared.input, errors.phone && shared.inputError]}
+              style={[
+                shared.input,
+                errors.phone && shared.inputError,
+                { backgroundColor: colors.cardBg, color: colors.roiCharcoal, borderColor: colors.roiLightGrey, fontSize: fontSizes.base },
+              ]}
               value={form.phone}
               onChangeText={(v) => setField('phone', v)}
               placeholder="e.g. 02 9988 2211"
-              placeholderTextColor={COLOR.roiGrey}
+              placeholderTextColor={colors.roiGrey}
               keyboardType="phone-pad"
               accessibilityLabel="Phone number"
             />
           </Field>
 
-          <Field label="Department *" error={errors.departmentId} last>
-            <View style={[styles.pickerWrapper, errors.departmentId && shared.inputError]}>
+          <Field label="Department *" error={errors.departmentId} last colors={colors} fontSizes={fontSizes}>
+            <View
+              style={[
+                styles.pickerWrapper,
+                errors.departmentId && shared.inputError,
+                { backgroundColor: colors.cardBg, borderColor: colors.roiLightGrey },
+              ]}
+            >
               <Picker
                 selectedValue={form.departmentId}
                 onValueChange={(val) => setField('departmentId', val)}
                 accessibilityLabel="Department"
-                style={styles.picker}
+                style={[styles.picker, { color: colors.roiCharcoal }]}
               >
                 {DEPARTMENTS.map((dept) => (
                   <Picker.Item key={dept.id} label={dept.name} value={dept.id} />
@@ -179,27 +197,35 @@ export function StaffFormPage({ staffId, onBack, onSaved, isTablet }) {
         </View>
 
         {/* ── Address ── */}
-        <View style={[shared.card, styles.section]}>
-          <Text style={shared.h1}>Address</Text>
+        <View style={[shared.card, styles.section, { backgroundColor: colors.cardBg }]}>
+          <Text style={[shared.h1, { color: colors.roiRed, fontSize: fontSizes.lg }]}>Address</Text>
 
-          <Field label="Street *" error={errors['addr.street']}>
+          <Field label="Street *" error={errors['addr.street']} colors={colors} fontSizes={fontSizes}>
             <TextInput
-              style={[shared.input, errors['addr.street'] && shared.inputError]}
+              style={[
+                shared.input,
+                errors['addr.street'] && shared.inputError,
+                { backgroundColor: colors.cardBg, color: colors.roiCharcoal, borderColor: colors.roiLightGrey, fontSize: fontSizes.base },
+              ]}
               value={form.address.street}
               onChangeText={(v) => setAddr('street', v)}
               placeholder="e.g. 1 Code Lane"
-              placeholderTextColor={COLOR.roiGrey}
+              placeholderTextColor={colors.roiGrey}
               accessibilityLabel="Street address"
             />
           </Field>
 
-          <Field label="City *" error={errors['addr.city']}>
+          <Field label="City *" error={errors['addr.city']} colors={colors} fontSizes={fontSizes}>
             <TextInput
-              style={[shared.input, errors['addr.city'] && shared.inputError]}
+              style={[
+                shared.input,
+                errors['addr.city'] && shared.inputError,
+                { backgroundColor: colors.cardBg, color: colors.roiCharcoal, borderColor: colors.roiLightGrey, fontSize: fontSizes.base },
+              ]}
               value={form.address.city}
               onChangeText={(v) => setAddr('city', v)}
               placeholder="e.g. Javaville"
-              placeholderTextColor={COLOR.roiGrey}
+              placeholderTextColor={colors.roiGrey}
               accessibilityLabel="City"
             />
           </Field>
@@ -207,25 +233,33 @@ export function StaffFormPage({ staffId, onBack, onSaved, isTablet }) {
           {/* State + Postcode side by side */}
           <View style={styles.row2}>
             <View style={styles.halfField}>
-              <Field label="State *" error={errors['addr.state']}>
+              <Field label="State *" error={errors['addr.state']} colors={colors} fontSizes={fontSizes}>
                 <TextInput
-                  style={[shared.input, errors['addr.state'] && shared.inputError]}
+                  style={[
+                    shared.input,
+                    errors['addr.state'] && shared.inputError,
+                    { backgroundColor: colors.cardBg, color: colors.roiCharcoal, borderColor: colors.roiLightGrey, fontSize: fontSizes.base },
+                  ]}
                   value={form.address.state}
                   onChangeText={(v) => setAddr('state', v)}
                   placeholder="e.g. NSW"
-                  placeholderTextColor={COLOR.roiGrey}
+                  placeholderTextColor={colors.roiGrey}
                   accessibilityLabel="State"
                 />
               </Field>
             </View>
             <View style={styles.halfField}>
-              <Field label="Postcode *" error={errors['addr.zip']}>
+              <Field label="Postcode *" error={errors['addr.zip']} colors={colors} fontSizes={fontSizes}>
                 <TextInput
-                  style={[shared.input, errors['addr.zip'] && shared.inputError]}
+                  style={[
+                    shared.input,
+                    errors['addr.zip'] && shared.inputError,
+                    { backgroundColor: colors.cardBg, color: colors.roiCharcoal, borderColor: colors.roiLightGrey, fontSize: fontSizes.base },
+                  ]}
                   value={form.address.zip}
                   onChangeText={(v) => setAddr('zip', v)}
                   placeholder="e.g. 0100"
-                  placeholderTextColor={COLOR.roiGrey}
+                  placeholderTextColor={colors.roiGrey}
                   keyboardType="numeric"
                   accessibilityLabel="Postcode"
                 />
@@ -233,13 +267,17 @@ export function StaffFormPage({ staffId, onBack, onSaved, isTablet }) {
             </View>
           </View>
 
-          <Field label="Country *" error={errors['addr.country']} last>
+          <Field label="Country *" error={errors['addr.country']} last colors={colors} fontSizes={fontSizes}>
             <TextInput
-              style={[shared.input, errors['addr.country'] && shared.inputError]}
+              style={[
+                shared.input,
+                errors['addr.country'] && shared.inputError,
+                { backgroundColor: colors.cardBg, color: colors.roiCharcoal, borderColor: colors.roiLightGrey, fontSize: fontSizes.base },
+              ]}
               value={form.address.country}
               onChangeText={(v) => setAddr('country', v)}
               placeholder="e.g. Australia"
-              placeholderTextColor={COLOR.roiGrey}
+              placeholderTextColor={colors.roiGrey}
               accessibilityLabel="Country"
             />
           </Field>
@@ -247,23 +285,25 @@ export function StaffFormPage({ staffId, onBack, onSaved, isTablet }) {
 
         {/* ── Actions ── */}
         <TouchableOpacity
-          style={shared.btnPrimary}
+          style={[shared.btnPrimary, { backgroundColor: colors.roiRed }]}
           onPress={handleSave}
           accessibilityRole="button"
           accessibilityLabel={isEdit ? 'Save profile changes' : 'Add staff member'}
         >
-          <Text style={shared.btnPrimaryText}>
+          <Text style={[shared.btnPrimaryText, { fontSize: fontSizes.base }]}>
             {isEdit ? '✓  Save Changes' : '+  Add Staff Member'}
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[shared.btnSecondary, styles.cancelBtn]}
+          style={[shared.btnSecondary, styles.cancelBtn, { backgroundColor: colors.roiLightGrey }]}
           onPress={onBack}
           accessibilityRole="button"
           accessibilityLabel="Cancel and go back"
         >
-          <Text style={shared.btnSecondaryText}>Cancel</Text>
+          <Text style={[shared.btnSecondaryText, { color: colors.roiCharcoal, fontSize: fontSizes.base }]}>
+            Cancel
+          </Text>
         </TouchableOpacity>
 
       </ScrollView>
@@ -282,12 +322,18 @@ export function StaffFormPage({ staffId, onBack, onSaved, isTablet }) {
 
 // ── Field wrapper ─────────────────────────────────────────────────────────────
 
-function Field({ label, error, children, last = false }) {
+function Field({ label, error, children, last = false, colors, fontSizes }) {
   return (
     <View style={{ marginBottom: last ? 0 : SPACE.md }}>
-      <Text style={shared.inputLabel}>{label}</Text>
+      <Text style={[shared.inputLabel, { color: colors.roiCharcoal, fontSize: fontSizes.sm }]}>
+        {label}
+      </Text>
       {children}
-      {error ? <Text style={shared.inputErrorText}>{error}</Text> : null}
+      {error ? (
+        <Text style={[shared.inputErrorText, { color: colors.roiRed, fontSize: fontSizes.xs }]}>
+          {error}
+        </Text>
+      ) : null}
     </View>
   );
 }

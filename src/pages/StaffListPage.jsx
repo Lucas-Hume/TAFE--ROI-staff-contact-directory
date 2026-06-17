@@ -20,10 +20,12 @@ import {
 import { getAllStaff, getDepartmentName } from '../data/staffStore.js';
 import { COLOR, FONT, SPACE, RADIUS } from '../styles/tokens.js';
 import { shared, avatarBgForIndex } from '../styles/componentStyles.js';
+import { useTheme } from '../contextsThemeContext.jsx';
 import {ImageBackground} from 'react-native';
 
 export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const { colors,fontSizes } = useTheme();
   const [, forceUpdate] = useState(0);  // trigger re-render after add
 
   const allStaff = getAllStaff();
@@ -36,31 +38,36 @@ export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
     name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase();
 
   const renderItem = useCallback(({ item, index }) => (
-    <TouchableOpacity
-      style={[
-        styles.row,
-        isTablet && styles.rowTablet,
-        index < filtered.length - 1 && shared.divider,
-      ]}
-      onPress={() => onViewProfile(item.id)}
-      accessibilityRole="button"
-      accessibilityLabel={`View profile for ${item.name}`}
-    >
-      {/* Avatar */}
-      <View style={[shared.avatarSm, { backgroundColor: avatarBgForIndex(index) }]}>
-        <Text style={shared.avatarTextSm}>{getInitials(item.name)}</Text>
-      </View>
+  <TouchableOpacity
+    style={[
+      styles.row,
+      isTablet && styles.rowTablet,
+      index < filtered.length - 1 && shared.divider,
+      { backgroundColor: colors.cardBg, borderBottomColor: colors.roiLightGrey },
+    ]}
+    onPress={() => onViewProfile(item.id)}
+    accessibilityRole="button"
+    accessibilityLabel={`View profile for ${item.name}`}
+  >
+    {/* Avatar */}
+    <View style={[shared.avatarSm, { backgroundColor: avatarBgForIndex(index) }]}>
+      <Text style={shared.avatarTextSm}>{getInitials(item.name)}</Text>
+    </View>
 
-      {/* Name + department */}
-      <View style={styles.rowText}>
-        <Text style={[shared.body, { fontWeight: FONT.weight.bold }]}>{item.name}</Text>
-        <Text style={shared.muted}>{getDepartmentName(item.departmentId)}</Text>
-      </View>
+    {/* Name + department */}
+    <View style={styles.rowText}>
+      <Text style={[shared.body, { fontWeight: '700', color: colors.roiCharcoal, fontSize: fontSizes.base }]}>
+        {item.name}
+      </Text>
+      <Text style={[shared.muted, { color: colors.roiGrey, fontSize: fontSizes.sm }]}>
+        {getDepartmentName(item.departmentId)}
+      </Text>
+    </View>
 
-      {/* Chevron */}
-      <Text style={styles.chevron}>›</Text>
-    </TouchableOpacity>
-  ), [filtered.length, isTablet, onViewProfile]);
+    {/* Chevron */}
+    <Text style={[styles.chevron, { color: colors.roiLightGrey }]}>›</Text>
+  </TouchableOpacity>
+), [filtered.length, isTablet, onViewProfile, colors, fontSizes]);
 
   // Tablet: 2 columns; phone: 1 column
   const numColumns = isTablet ? 2 : 1;
@@ -73,9 +80,9 @@ export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
 
     >
       {/* ── Page header ── */}
-      <View style={shared.pageHeader}>
-        <Text style={shared.pageTitle}>Staff Directory</Text>
-        <Text style={shared.pageSubtitle}>Red Opal Innovations</Text>
+      <View style={[shared.pageHeader, { backgroundColor: colors.roiRed }]}>
+        <Text style={[shared.pageTitle, { fontSize: fontSizes.xl }]}>Staff Directory</Text>
+        <Text style={[shared.pageSubtitle, { fontSize: fontSizes.sm }]}>Red Opal Innovations</Text>
       </View>
 
       {/* ── Content ── */}
@@ -83,9 +90,11 @@ export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
 
         {/* Search bar */}
         <TextInput
-          style={[shared.input, styles.search]}
+          style={[shared.input, styles.search,
+            { backgroundColor: colors.cardBg, color: colors.roiCharcoal, borderColor: colors.roiLightGrey, fontSize: fontSizes.base}
+          ]}
           placeholder="Search by name or department…"
-          placeholderTextColor={COLOR.roiGrey}
+          placeholderTextColor={colors.roiGrey}
           value={searchTerm}
           onChangeText={setSearchTerm}
           accessibilityLabel="Search staff members"
@@ -93,24 +102,24 @@ export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
         />
 
         {/* Count + Add button */}
-        <View style={styles.toolbar}>
-          <Text style={shared.muted}>
+        <View style={styles.toolbar}>:
+          <Text style={[shared.muted, { color: colors.roiGrey, fontSize: fontSizes.sm}]}>
             {filtered.length} {filtered.length === 1 ? 'staff member' : 'staff members'}
           </Text>
           <TouchableOpacity
-            style={styles.addBtn}
+            style={[styles.addBtn, {backGroundColor: colors.roiRed}]}
             onPress={onAddStaff}
             accessibilityRole="button"
             accessibilityLabel="Add new staff member"
           >
-            <Text style={styles.addBtnText}>+ Add Staff</Text>
+            <Text style={[styles.addBtnText, {fontSize: fontSizes.sm}]}>+ Add Staff</Text>
           </TouchableOpacity>
         </View>
 
         {/* Staff list */}
         {filtered.length === 0 ? (
-          <View style={[shared.card, styles.empty]}>
-            <Text style={shared.muted}>No staff members match your search.</Text>
+          <View style={[shared.card, styles.empty, {backGroundColor: colors.cardBg}]}>
+            <Text style={[shared.muted, {color: colors.roiGrey, fontSize: fontSizes.sm}]}>No staff members match your search.</Text>
           </View>
         ) : (
           <FlatList
@@ -120,7 +129,7 @@ export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
             renderItem={renderItem}
             numColumns={numColumns}
             contentContainerStyle={styles.list}
-            style={[shared.card, { marginBottom: 0 }]}
+            style={[shared.card, { marginBottom: 0, backGroundColor: colors.cardBg }]}
             showsVerticalScrollIndicator={false}
           />
         )}

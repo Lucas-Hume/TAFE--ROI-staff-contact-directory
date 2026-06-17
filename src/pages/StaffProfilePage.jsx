@@ -11,26 +11,34 @@
  */
 
 import {
-  View, Text, ScrollView, TouchableOpacity, Linking, StyleSheet,
+  View, Text, ScrollView, TouchableOpacity, Linking, StyleSheet,ImageBackground,
 } from 'react-native';
 import { getStaffById, getDepartmentName } from '../data/staffStore.js';
 import { COLOR, FONT, SPACE, RADIUS } from '../styles/tokens.js';
 import { shared, avatarBgForIndex } from '../styles/componentStyles.js';
+import { useTheme } from '../contexts/ThemeContext.jsx';
 
 export function StaffProfilePage({ staffId, onBack, onEdit, isTablet }) {
+  const { colors, fontSizes } = useTheme();
   const member = getStaffById(staffId);
 
   if (!member) {
-    return (
-      <ImageBackground
+  return (
+    <ImageBackground
       source={{ uri: 'https://raw.githubusercontent.com/Lucas-Hume/ROI_assets/main/assets/Background.jpg' }}
-      style={{ flex:1}}
-      resizeMode="cover">
-        <Text style={shared.h1}>Staff member not found.</Text>
-        <TouchableOpacity style={[shared.btnPrimary, styles.backBtn]} onPress={onBack}>
-          <Text style={shared.btnPrimaryText}>Back to Directory</Text>
-        </TouchableOpacity>
-      </ImageBackground>
+      style={{ flex: 1 }}
+      resizeMode="cover"
+    >
+      <Text style={[shared.h1, { color: colors.roiRed, fontSize: fontSizes.lg }]}>
+        Staff member not found.
+      </Text>
+      <TouchableOpacity
+        style={[shared.btnPrimary, styles.backBtn, { backgroundColor: colors.roiRed }]}
+        onPress={onBack}
+      >
+        <Text style={[shared.btnPrimaryText, { fontSize: fontSizes.base }]}>Back to Directory</Text>
+      </TouchableOpacity>
+    </ImageBackground>
     );
   }
 
@@ -52,18 +60,18 @@ export function StaffProfilePage({ staffId, onBack, onEdit, isTablet }) {
   return (
     <View style={shared.screen}>
       {/* ── Header ── */}
-      <View style={shared.pageHeaderRow}>
+      <View style={[shared.pageHeaderRow, { backgroundColor: colors.roiRed }]}>
         <TouchableOpacity
           onPress={onBack}
           accessibilityRole="button"
           accessibilityLabel="Back to staff list"
           style={styles.backArrow}
         >
-          <Text style={styles.backArrowText}>‹</Text>
+          <Text style={[styles.backArrowText, { color: colors.white }]}>‹</Text>
         </TouchableOpacity>
         <View>
-          <Text style={shared.pageTitle}>Staff Profile</Text>
-          <Text style={shared.pageSubtitle}>Red Opal Innovations</Text>
+          <Text style={[shared.pageTitle, { fontSize: fontSizes.xl }]}>Staff Profile</Text>
+          <Text style={[shared.pageSubtitle, { fontSize: fontSizes.sm }]}>Red Opal Innovations</Text>
         </View>
       </View>
 
@@ -75,49 +83,55 @@ export function StaffProfilePage({ staffId, onBack, onEdit, isTablet }) {
         showsVerticalScrollIndicator={false}
       >
         {/* ── Profile card ── */}
-        <View style={shared.card}>
-          <View style={styles.profileTop}>
+        <View style={[shared.card, { backgroundColor: colors.cardBg }]}>
+          <View style={[styles.profileTop, { borderBottomColor: colors.roiLightGrey }]}>
             {/* Large avatar */}
             <View style={[shared.avatarLg, { backgroundColor: avatarBg }]}>
               <Text style={shared.avatarTextLg}>{initials}</Text>
             </View>
             <View style={styles.nameBlock}>
-              <Text style={shared.h1}>{member.name}</Text>
-              <Text style={shared.muted}>Staff ID: {member.id}</Text>
-            </View>
+              <Text style={[shared.h1, { color: colors.roiRed, fontSize: fontSizes.lg }]}>{member.name}</Text>
+              <Text style={[shared.muted, { color: colors.roiGrey, fontSize: fontSizes.sm }]}>
+                Staff ID: {member.id}
+              </Text>
           </View>
+          </View>
+        </View>
 
           {/* Detail rows */}
-          <DetailRow label="Department" value={deptName} />
+          <DetailRow label="Department" value={deptName} colors={colors} fontSizes={fontSizes} />
 
           <DetailRow
             label="Phone"
             value={member.phone}
             onPress={handleCall}
             isLink
+            colors={colors}
+            fontSizes={fontSizes}
           />
 
-          <DetailRow label="Address" value={fullAddr} last />
-        </View>
+          <DetailRow label="Address" value={fullAddr} last colors={colors} fontSizes={fontSizes} />
 
         {/* ── Actions ── */}
-        <TouchableOpacity
-          style={shared.btnPrimary}
-          onPress={() => onEdit(member.id)}
-          accessibilityRole="button"
-          accessibilityLabel="Edit this staff profile"
-        >
-          <Text style={shared.btnPrimaryText}>✎  Edit Profile</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={[shared.btnPrimary, { backgroundColor: colors.roiRed }]}
+            onPress={() => onEdit(member.id)}
+            accessibilityRole="button"
+            accessibilityLabel="Edit this staff profile"
+          >
+            <Text style={[shared.btnPrimaryText, { fontSize: fontSizes.base }]}>✎  Edit Profile</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={[shared.btnSecondary, styles.backBtn]}
-          onPress={onBack}
-          accessibilityRole="button"
-          accessibilityLabel="Back to staff directory"
-        >
-          <Text style={shared.btnSecondaryText}>Back to Directory</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={[shared.btnSecondary, styles.backBtn, { backgroundColor: colors.roiLightGrey }]}
+            onPress={onBack}
+            accessibilityRole="button"
+            accessibilityLabel="Back to staff directory"
+          >
+            <Text style={[shared.btnSecondaryText, { color: colors.roiCharcoal, fontSize: fontSizes.base }]}>
+              Back to Directory
+            </Text>
+          </TouchableOpacity>
       </ScrollView>
     </View>
   );
@@ -125,22 +139,26 @@ export function StaffProfilePage({ staffId, onBack, onEdit, isTablet }) {
 
 // ── Helper: detail row ────────────────────────────────────────────────────────
 
-function DetailRow({ icon, label, value, onPress, isLink = false, last = false }) {
+function DetailRow({ icon, label, value, onPress, isLink = false, last = false, colors, fontSizes }) {
   return (
-    <View style={[styles.detailRow, !last && shared.divider]}>
+    <View style={[styles.detailRow, !last && shared.divider, !last && { borderBottomColor: colors.roiLightGrey }]}>
       {/* Icon in red circle */}
-      <View style={styles.iconBox}>
+      <View style={[styles.iconBox, { backgroundColor: colors.iconBg }]}>
         <Text style={styles.iconText}>{icon}</Text>
       </View>
 
       <View style={styles.detailText}>
-        <Text style={[shared.micro, styles.detailLabel]}>{label.toUpperCase()}</Text>
+        <Text style={[shared.micro, styles.detailLabel, { color: colors.roiGrey, fontSize: fontSizes.xs }]}>
+          {label.toUpperCase()}
+        </Text>
         {isLink ? (
           <TouchableOpacity onPress={onPress} accessibilityRole="link">
-            <Text style={shared.link}>{value}</Text>
+            <Text style={[shared.link, { color: colors.roiBurntOrange, fontSize: fontSizes.base }]}>
+              {value}
+            </Text>
           </TouchableOpacity>
         ) : (
-          <Text style={shared.body}>{value}</Text>
+          <Text style={[shared.body, { color: colors.roiCharcoal, fontSize: fontSizes.base }]}>{value}</Text>
         )}
       </View>
     </View>
