@@ -20,6 +20,7 @@ import {
 import { getAllStaff, getDepartmentName } from '../data/staffStore.js';
 import { COLOR, FONT, SPACE, RADIUS } from '../styles/tokens.js';
 import { shared, avatarBgForIndex } from '../styles/componentStyles.js';
+import {ImageBackground} from 'react-native';
 
 export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -65,7 +66,12 @@ export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
   const numColumns = isTablet ? 2 : 1;
 
   return (
-    <View style={shared.screen}>
+    <ImageBackground
+      source={{ uri: 'https://raw.githubusercontent.com/Lucas-Hume/TAFE--ROI-staff-contact-directory/main/assets/Background.jpg' }}
+      style={{ flex:1}}
+      resizeMode="cover"
+
+    >
       {/* ── Page header ── */}
       <View style={shared.pageHeader}>
         <Text style={shared.pageTitle}>Staff Directory</Text>
@@ -119,7 +125,7 @@ export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
           />
         )}
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 

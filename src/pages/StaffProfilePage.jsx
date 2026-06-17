@@ -22,12 +22,15 @@ export function StaffProfilePage({ staffId, onBack, onEdit, isTablet }) {
 
   if (!member) {
     return (
-      <View style={[shared.screen, styles.centred]}>
+      <ImageBackground
+      source={{ uri: 'https://raw.githubusercontent.com/Lucas-Hume/TAFE--ROI-staff-contact-directory/main/assets/Background.jpg' }}
+      style={{ flex:1}}
+      resizeMode="cover">
         <Text style={shared.h1}>Staff member not found.</Text>
         <TouchableOpacity style={[shared.btnPrimary, styles.backBtn]} onPress={onBack}>
           <Text style={shared.btnPrimaryText}>Back to Directory</Text>
         </TouchableOpacity>
-      </View>
+      </ImageBackground>
     );
   }
 
@@ -85,17 +88,16 @@ export function StaffProfilePage({ staffId, onBack, onEdit, isTablet }) {
           </View>
 
           {/* Detail rows */}
-          <DetailRow icon="🏢" label="Department" value={deptName} />
+          <DetailRow label="Department" value={deptName} />
 
           <DetailRow
-            icon="📞"
             label="Phone"
             value={member.phone}
             onPress={handleCall}
             isLink
           />
 
-          <DetailRow icon="📍" label="Address" value={fullAddr} last />
+          <DetailRow label="Address" value={fullAddr} last />
         </View>
 
         {/* ── Actions ── */}
