@@ -20,7 +20,7 @@ import {
 import { getAllStaff, getDepartmentName } from '../data/staffStore.js';
 import { COLOR, FONT, SPACE, RADIUS } from '../styles/tokens.js';
 import { shared, avatarBgForIndex } from '../styles/componentStyles.js';
-import { useTheme } from '../contextsThemeContext.jsx';
+import { useTheme } from '../contexts/ThemeContext.jsx';
 import {ImageBackground} from 'react-native';
 
 export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
