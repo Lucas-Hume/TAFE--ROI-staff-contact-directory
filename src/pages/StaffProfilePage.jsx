@@ -23,7 +23,7 @@ export function StaffProfilePage({ staffId, onBack, onEdit, isTablet }) {
   if (!member) {
     return (
       <ImageBackground
-      source={{ uri: 'https://raw.githubusercontent.com/Lucas-Hume/TAFE--ROI-staff-contact-directory/main/assets/Background.jpg' }}
+      source={{ uri: 'https://raw.githubusercontent.com/Lucas-Hume/ROI_assets/main/assets/Background.jpg' }}
       style={{ flex:1}}
       resizeMode="cover">
         <Text style={shared.h1}>Staff member not found.</Text>

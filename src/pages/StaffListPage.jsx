@@ -67,7 +67,7 @@ export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
 
   return (
     <ImageBackground
-      source={{ uri: 'https://raw.githubusercontent.com/Lucas-Hume/TAFE--ROI-staff-contact-directory/main/assets/Background.jpg' }}
+      source={{ uri: 'https://raw.githubusercontent.com/Lucas-Hume/ROI_assets/main/assets/Background.jpg' }}
       style={{ flex:1}}
       resizeMode="cover"
 
