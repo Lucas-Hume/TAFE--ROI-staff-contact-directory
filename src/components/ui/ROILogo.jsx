@@ -1,14 +1,4 @@
-/**
- * src/components/ui/ROILogo.jsx
- *
- * ROI corporate logo for React Native.
- * Rendered as an image from company style guidlines.
- *
- * Style Guide rules (p.3 & p.4):
- *  - Red rectangle background, white serif "ROI" lettering
- *  - Never distort, recolour, or overlap
- *  - Minimum width: 110px mobile, 130px tablet
- */
+
 
 import { Image } from 'react-native';
 

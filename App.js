@@ -1,6 +1,6 @@
 /**
- * App.jsx — Root component
- * Wraps everything in ThemeProvider so all screens
+ * Root component
+ * Wraps everything in ThemeProvider so screens
  * have access to the current accessibility theme.
  */
 

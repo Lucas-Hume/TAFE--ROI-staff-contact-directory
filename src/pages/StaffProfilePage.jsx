@@ -59,7 +59,7 @@ export function StaffProfilePage({ staffId, onBack, onEdit, isTablet }) {
 
   return (
     <View style={shared.screen}>
-      {/* ── Header ── */}
+      {/*Header*/}
       <View style={[shared.pageHeaderRow, { backgroundColor: colors.roiRed }]}>
         <TouchableOpacity
           onPress={onBack}
@@ -82,7 +82,7 @@ export function StaffProfilePage({ staffId, onBack, onEdit, isTablet }) {
         ]}
         showsVerticalScrollIndicator={false}
       >
-        {/* ── Profile card ── */}
+        {/*Profile card*/}
         <View style={[shared.card, { backgroundColor: colors.cardBg }]}>
           <View style={[styles.profileTop, { borderBottomColor: colors.roiLightGrey }]}>
             {/* Large avatar */}
@@ -112,7 +112,7 @@ export function StaffProfilePage({ staffId, onBack, onEdit, isTablet }) {
         
           <DetailRow label="Address" value={fullAddr} last colors={colors} fontSizes={fontSizes} />
         </View>
-        {/* ── Actions ── */}
+        {/*Actions*/}
           <TouchableOpacity
             style={[shared.btnPrimary, { backgroundColor: colors.roiRed }]}
             onPress={() => onEdit(member.id)}
@@ -137,7 +137,7 @@ export function StaffProfilePage({ staffId, onBack, onEdit, isTablet }) {
   );
 }
 
-// ── Helper: detail row ────────────────────────────────────────────────────────
+//Helper: detail row ────────────────────────────────────────────────────────
 
 function DetailRow({ icon, label, value, onPress, isLink = false, last = false, colors, fontSizes }) {
   return (

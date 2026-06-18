@@ -1,11 +1,8 @@
 /**
  * src/pages/StaffListPage.jsx
- *
+ 
  * Functional requirement: "see a listing of all company staff profiles"
- *
- * Uses FlatList for performant scrolling on Android.
- * Adapts to a 2-column grid on tablet (landscape).
- *
+ 
  * Props:
  *   onViewProfile {function(id)} — navigate to profile view
  *   onAddStaff    {function}     — navigate to add form
@@ -79,13 +76,13 @@ export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
       resizeMode="cover"
 
     >
-      {/* ── Page header ── */}
+      {/*Page header */}
       <View style={[shared.pageHeader, { backgroundColor: colors.roiRed }]}>
         <Text style={[shared.pageTitle, { fontSize: fontSizes.xl }]}>Staff Directory</Text>
         <Text style={[shared.pageSubtitle, { fontSize: fontSizes.sm }]}>Red Opal Innovations</Text>
       </View>
 
-      {/* ── Content ── */}
+      {/*Content */}
       <View style={[styles.content, isTablet && styles.contentTablet]}>
 
         {/* Search bar */}
@@ -101,7 +98,7 @@ export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
           clearButtonMode="while-editing"
         />
 
-        {/* Count + Add button */}
+        {/*Count + Add button*/}
         <View style={styles.toolbar}>
           <Text style={[shared.muted, { color: colors.roiGrey, fontSize: fontSizes.sm}]}>
             {filtered.length} {filtered.length === 1 ? 'staff member' : 'staff members'}

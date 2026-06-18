@@ -1,6 +1,6 @@
 /**
  * src/contexts/ThemeContext.jsx
- * Provides light/dark mode and large text accessibility settings
+ * Provides light/dark mode and large text settings
  * to every screen in the app.
  */
 

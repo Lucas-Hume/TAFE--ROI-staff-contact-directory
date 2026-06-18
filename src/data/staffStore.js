@@ -1,11 +1,9 @@
 /**
  * src/data/staffStore.js
  *
- * In-memory staff data store seeded with sample test data from the client
+ * In-memory staff data storage  from the client
  * brief (Table 1 & Table 2).
- *
- * In production this would communicate with a remote data source (section 3.1)
- * and cache locally for offline use.
+ * Note: This is not a real database! It will reset every time the app reloads.
  */
 
 // Departments — Table 2

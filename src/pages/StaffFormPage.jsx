@@ -139,7 +139,7 @@ export function StaffFormPage({ staffId, onBack, onSaved, isTablet }) {
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       >
-        {/* ── Personal details ── */}
+        {/*Personal details*/}
         <View style={[shared.card, styles.section, { backgroundColor: colors.cardBg }]}>
           <Text style={[shared.h1, { color: colors.roiRed, fontSize: fontSizes.lg }]}>Personal Details</Text>
 
@@ -196,7 +196,7 @@ export function StaffFormPage({ staffId, onBack, onSaved, isTablet }) {
           </Field>
         </View>
 
-        {/* ── Address ── */}
+        {/* Address */}
         <View style={[shared.card, styles.section, { backgroundColor: colors.cardBg }]}>
           <Text style={[shared.h1, { color: colors.roiRed, fontSize: fontSizes.lg }]}>Address</Text>
 
@@ -283,7 +283,7 @@ export function StaffFormPage({ staffId, onBack, onSaved, isTablet }) {
           </Field>
         </View>
 
-        {/* ── Actions ── */}
+        {/* Actions */}
         <TouchableOpacity
           style={[shared.btnPrimary, { backgroundColor: colors.roiRed }]}
           onPress={handleSave}
@@ -308,7 +308,7 @@ export function StaffFormPage({ staffId, onBack, onSaved, isTablet }) {
 
       </ScrollView>
 
-      {/* ── Success / error dialog ── */}
+      {/* Success / error dialog */}
       <Dialog
         visible={dialog.visible}
         type={dialog.type}
@@ -320,7 +320,7 @@ export function StaffFormPage({ staffId, onBack, onSaved, isTablet }) {
   );
 }
 
-// ── Field wrapper ─────────────────────────────────────────────────────────────
+// Field wrapper
 
 function Field({ label, error, children, last = false, colors, fontSizes }) {
   return (

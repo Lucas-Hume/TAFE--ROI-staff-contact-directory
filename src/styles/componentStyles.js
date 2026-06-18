@@ -1,13 +1,13 @@
 /**
  * src/styles/componentStyles.js
- * Shared StyleSheet values for React Native components.
- * All values reference tokens — never hard-coded.
+ * StyleSheet values for React Native components.
+ * values reference tokens — never hard-coded.
  */
 
 import { StyleSheet } from 'react-native';
 import { COLOR, FONT, SPACE, RADIUS } from './tokens.js';
 
-// Avatar background colours cycling through the ROI palette
+// Avatar background colours cycling through colour palette
 const AVATAR_COLORS = [
   COLOR.roiRed,
   COLOR.roiCharcoal,
@@ -19,13 +19,13 @@ const AVATAR_COLORS = [
 export const avatarBgForIndex = (idx) => AVATAR_COLORS[idx % AVATAR_COLORS.length];
 
 export const shared = StyleSheet.create({
-  // ── Page scaffold ─────────────────────────────────────────────────────────
+  // Page scaffold
   screen: {
     flex:            1,
     backgroundColor: COLOR.pageBg,
   },
 
-  // ── Page header banner ────────────────────────────────────────────────────
+  //Page header banner
   pageHeader: {
     backgroundColor: COLOR.roiRed,
     paddingHorizontal: SPACE.lg,
@@ -54,7 +54,7 @@ export const shared = StyleSheet.create({
     marginTop:   SPACE.xs,
   },
 
-  // ── Cards ─────────────────────────────────────────────────────────────────
+  // Cards
   card: {
     backgroundColor: COLOR.cardBg,
     borderRadius:    RADIUS.md,
@@ -78,7 +78,7 @@ export const shared = StyleSheet.create({
     elevation:       2,
   },
 
-  // ── Section header (inside card) ──────────────────────────────────────────
+  // Section header (inside card)
   sectionHeader: {
     flexDirection:   'row',
     alignItems:      'center',
@@ -89,7 +89,7 @@ export const shared = StyleSheet.create({
     gap:             SPACE.sm,
   },
 
-  // ── Typography ────────────────────────────────────────────────────────────
+  // Typography
   // ROI Red → main headings, Charcoal → sub, Grey → further sub (p.12)
   h1: {
     fontFamily:  FONT.family,
@@ -134,7 +134,7 @@ export const shared = StyleSheet.create({
     color:       COLOR.roiBurntOrange,   // Burnt Orange for links per p.12
   },
 
-  // ── Buttons ───────────────────────────────────────────────────────────────
+  // Buttons
   btnPrimary: {
     backgroundColor: COLOR.roiRed,
     borderRadius:    RADIUS.sm,
@@ -164,7 +164,7 @@ export const shared = StyleSheet.create({
     color:       COLOR.roiCharcoal,
   },
 
-  // ── Inputs ────────────────────────────────────────────────────────────────
+  // Inputs
   input: {
     borderWidth:     1,
     borderColor:     COLOR.roiLightGrey,
@@ -194,13 +194,13 @@ export const shared = StyleSheet.create({
     marginTop:   SPACE.xs,
   },
 
-  // ── Divider ───────────────────────────────────────────────────────────────
+  // Divider
   divider: {
     borderBottomWidth: 1,
     borderBottomColor: COLOR.roiLightGrey,
   },
 
-  // ── Avatar ────────────────────────────────────────────────────────────────
+  //  Avatar
   avatarSm: {
     width:           40,
     height:          40,

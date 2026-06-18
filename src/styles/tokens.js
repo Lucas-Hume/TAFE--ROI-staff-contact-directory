@@ -16,8 +16,7 @@ export const COLOR = {
   cardBg:         '#ffffff',
 };
 
-// React Native uses fontFamily strings differently per platform.
-// Trebuchet MS is available on Android. Fallback is the system sans-serif.
+// Trebuchet MS is available on Android. Fallback is sans-serif.
 export const FONT = {
   family:        'Trebuchet MS',
   familyFallback:'sans-serif',
