@@ -1,7 +1,7 @@
 # ROI Staff Contact Directory — Snack Expo
 
 Red Opal Innovations Staff Contact Directory
-Built with React Native for Android phone and tablet.
+Built with React Native for Android phone and tablet.Also is compatible with iphone (in snack expo testing this was found to be compatible).
 
 ---
 
@@ -19,7 +19,7 @@ Snack reads package.json automatically. The two packages needed are:
 - react-native-svg (for the ROI logo)
 - @react-native-picker/picker (for the department dropdown)
 
-If they don't load automatically, paste this into Snack's package.json tab:
+If they don't load automatically, copy and paste this into Snack's package.json tab:
 ```json
 {
   "dependencies": {
@@ -30,7 +30,7 @@ If they don't load automatically, paste this into Snack's package.json tab:
 ```
 
 ### Step 4 — Preview
-Use the Android preview panel on the right.
+Use the Android preview panel on the right as per requirements.
 Switch between phone and tablet using the device selector at the top.
 
 ---
