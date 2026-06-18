@@ -17,11 +17,13 @@
  */
 
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { COLOR, FONT, SPACE, RADIUS } from '../../styles/tokens.js';
+import { SPACE, RADIUS } from '../../styles/tokens.js';
+import { useTheme } from '../../contexts/ThemeContext.jsx';
 
 export function Dialog({ visible, type = 'success', title, message, onClose }) {
+  const { colors, fontSizes } = useTheme();
   const isSuccess  = type === 'success';
-  const accentColor = isSuccess ? '#1a6e2e' : COLOR.roiRed;
+  const accentColor = isSuccess ? '#1a6e2e' : colors.roiRed;
   const bgColor     = isSuccess ? '#f0faf4'  : '#fdf0f0';
 
   return (
@@ -35,25 +37,29 @@ export function Dialog({ visible, type = 'success', title, message, onClose }) {
       {/* Backdrop */}
       <View style={styles.backdrop}>
         {/* Dialog box */}
-        <View style={[styles.box, { borderTopColor: accentColor }]}>
+        <View style={[styles.box, { borderTopColor: accentColor, backgroundColor: colors.cardBg }]}>
 
           {/* Title row */}
-          <View style={styles.titleRow}>
-            <Text style={[styles.titleText, { color: accentColor }]}>
+          <View style={[styles.titleRow, { borderBottomColor: colors.roiLightGrey }]}>
+            <Text style={[styles.titleText, { color: accentColor, fontSize: fontSizes.md }]}>
               {isSuccess ? '✓  ' : '✕  '}{title}
             </Text>
           </View>
 
           {/* Body */}
           <View style={[styles.body, { backgroundColor: bgColor }]}>
-            <Text style={styles.message}>{message}</Text>
+            <Text style={[styles.message, { color: colors.roiCharcoal, fontSize: fontSizes.base }]}>
+              {message}
+            </Text>
             <TouchableOpacity
               style={[styles.okBtn, { backgroundColor: accentColor }]}
               onPress={onClose}
               accessibilityRole="button"
               accessibilityLabel="OK, close dialog"
             >
-              <Text style={styles.okText}>OK</Text>
+              <Text style={[styles.okText, { fontSize: fontSizes.base }]}>
+                OK
+              </Text>
             </TouchableOpacity>
           </View>
 
@@ -72,7 +78,6 @@ const styles = StyleSheet.create({
     padding:         SPACE.lg,
   },
   box: {
-    backgroundColor: COLOR.white,
     borderRadius:    RADIUS.md,
     width:           '100%',
     maxWidth:        360,
@@ -83,20 +88,16 @@ const styles = StyleSheet.create({
   titleRow: {
     padding:         SPACE.md,
     borderBottomWidth: 1,
-    borderBottomColor: COLOR.roiLightGrey,
   },
   titleText: {
-    fontFamily:  FONT.family,
-    fontSize:    FONT.size.md,
-    fontWeight:  FONT.weight.bold,
+    fontFamily:  'Trebuchet MS',
+    fontWeight:  '700',
   },
   body: {
     padding: SPACE.lg,
   },
   message: {
-    fontFamily:   FONT.family,
-    fontSize:     FONT.size.base,
-    color:        COLOR.roiCharcoal,
+    fontFamily:   'Trebuchet MS',
     lineHeight:   21,
     marginBottom: SPACE.lg,
   },
@@ -106,9 +107,8 @@ const styles = StyleSheet.create({
     alignItems:      'center',
   },
   okText: {
-    fontFamily:  FONT.family,
-    fontSize:    FONT.size.base,
-    fontWeight:  FONT.weight.bold,
-    color:       COLOR.white,
+    fontFamily:  'Trebuchet MS',
+    fontWeight:  '700',
+    color:       '#ffffff',
   },
 });

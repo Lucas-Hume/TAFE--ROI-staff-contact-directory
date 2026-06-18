@@ -94,9 +94,9 @@ export function StaffProfilePage({ staffId, onBack, onEdit, isTablet }) {
               <Text style={[shared.muted, { color: colors.roiGrey, fontSize: fontSizes.sm }]}>
                 Staff ID: {member.id}
               </Text>
+           </View>
           </View>
-          </View>
-        </View>
+        
 
           {/* Detail rows */}
           <DetailRow label="Department" value={deptName} colors={colors} fontSizes={fontSizes} />
@@ -109,9 +109,9 @@ export function StaffProfilePage({ staffId, onBack, onEdit, isTablet }) {
             colors={colors}
             fontSizes={fontSizes}
           />
-
+        
           <DetailRow label="Address" value={fullAddr} last colors={colors} fontSizes={fontSizes} />
-
+        </View>
         {/* ── Actions ── */}
           <TouchableOpacity
             style={[shared.btnPrimary, { backgroundColor: colors.roiRed }]}
