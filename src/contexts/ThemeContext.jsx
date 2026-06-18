@@ -5,18 +5,10 @@
  */
 
 import { createContext, useContext, useState } from 'react';
-
+import { COLOR} from '../styles/tokens.js';
 const LIGHT = {
-  pageBg:          '#f4f4f4',
-  cardBg:          '#ffffff',
-  roiRed:          '#941a1d',
-  roiCharcoal:     '#262626',
-  roiGrey:         '#595959',
-  roiBurntOrange:  '#c64c38',
-  roiMidGrey:      '#3b3b3b',
-  roiLightGrey:    '#D9D9D9',
-  white:           '#ffffff',
-  navBg:           '#262626',
+  ...COLOR,
+  navBg:          '#ffffff',
   sectionHeaderBg: '#fafafa',
   iconBg:          '#fdf0f0',
 };

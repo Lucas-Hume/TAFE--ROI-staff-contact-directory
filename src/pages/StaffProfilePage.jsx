@@ -94,7 +94,7 @@ export function StaffProfilePage({ staffId, onBack, onEdit, isTablet }) {
               <Text style={[shared.muted, { color: colors.roiGrey, fontSize: fontSizes.sm }]}>
                 Staff ID: {member.id}
               </Text>
-          </View>
+           </View>
           </View>
         </View>
 

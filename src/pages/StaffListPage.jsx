@@ -102,12 +102,12 @@ export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
         />
 
         {/* Count + Add button */}
-        <View style={styles.toolbar}>:
+        <View style={styles.toolbar}>
           <Text style={[shared.muted, { color: colors.roiGrey, fontSize: fontSizes.sm}]}>
             {filtered.length} {filtered.length === 1 ? 'staff member' : 'staff members'}
           </Text>
           <TouchableOpacity
-            style={[styles.addBtn, {backGroundColor: colors.roiRed}]}
+            style={[styles.addBtn, {backgroundColor: colors.roiRed}]}
             onPress={onAddStaff}
             accessibilityRole="button"
             accessibilityLabel="Add new staff member"
@@ -118,7 +118,7 @@ export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
 
         {/* Staff list */}
         {filtered.length === 0 ? (
-          <View style={[shared.card, styles.empty, {backGroundColor: colors.cardBg}]}>
+          <View style={[shared.card, styles.empty, {backgroundColor: colors.cardBg}]}>
             <Text style={[shared.muted, {color: colors.roiGrey, fontSize: fontSizes.sm}]}>No staff members match your search.</Text>
           </View>
         ) : (
@@ -129,7 +129,7 @@ export function StaffListPage({ onViewProfile, onAddStaff, isTablet }) {
             renderItem={renderItem}
             numColumns={numColumns}
             contentContainerStyle={styles.list}
-            style={[shared.card, { marginBottom: 0, backGroundColor: colors.cardBg }]}
+            style={[shared.card, { marginBottom: 0, backgroundColor: colors.cardBg }]}
             showsVerticalScrollIndicator={false}
           />
         )}
