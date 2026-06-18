@@ -8,7 +8,7 @@ import { createContext, useContext, useState } from 'react';
 import { COLOR} from '../styles/tokens.js';
 const LIGHT = {
   ...COLOR,
-  navBg:          '#ffffff',
+  navBg:            COLOR.roiCharcoal,
   sectionHeaderBg: '#fafafa',
   iconBg:          '#fdf0f0',
 };
